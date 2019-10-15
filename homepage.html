@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Chicken Logger</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="homePage.js"></script>
+
+</head>
+
+<body>
+
+    <div data-role="page" id="home">
+        <header data-role="header">
+            <h1>Cook Good Food</h1>
+        </header>
+        <article data-role="content">
+            <ul data-role="listview">
+                <li>
+                    <a href="#getFoodIdeaForm" id="getFoodIdea">Get Food Idea</a>
+                </li>
+                <li>
+                    <a href="#submitFoodIdeaForm" id="submitFoodIdea">Submit Food Idea</a>
+                </li>
+            </ul>
+        </article>
+        <footer data-role="header">
+            <h3>&copy; CQUniversity, R. Balsys. 2019</h3>
+        </footer>
+    </div>
+
+    <div *ngIf = "showHomePage" data-role="page" id="home">
+            <header data-role="header">
+                <h1>Cook Good Food</h1>
+            </header>
+            <article data-role="content">
+                <ul data-role="listview">
+                    <li>
+                        <a href="#getFoodIdeaForm" id="getFoodIdea">Get Food Idea</a>
+                    </li>
+                    <li>
+                        <a href="#submitFoodIdeaForm" id="submitFoodIdea">Submit Food Idea</a>
+                    </li>
+                </ul>
+            </article>
+            <footer data-role="header">
+                <h3>&copy; CQUniversity, R. Balsys. 2019</h3>
+            </footer>
+        </div>
+
+
+    <div data-role="page" id="getFoodIdeaForm">
+        <header data-role="header">
+            <h1>Cook Good Food</h1>
+            <a href="#" data-icon="arrow-l" data-role="button" data-rel="back" onclick="clearForm()">Back</a>
+            <a href="#" data-role="button" data-inline="true" id="clear" onclick="clearForm()">Clear</a>
+        </header>
+
+        <body>
+            <form data-role="content" id="form">
+                <label for="text-basic">Enter Ingredient 1</label>
+                <input type="text" name="ingredient1" id="ingredient1" value="">
+
+                <label for="text-basic">Enter Ingredient 2</label>
+                <input type="text" name="ingredient2" id="ingredient2" value="">
+
+                <label for="text-basic">Enter Ingredient 3</label>
+                <input type="text" name="ingredient3" id="ingredient3" value="">
+
+                <a href="#showLogs" data-role="button" onclick="getFood()" id="getFood">Check Food Idea</a>
+            </form>
+        </body>
+        <footer data-role="header">
+            <h3>&copy; CQUniversity, R. Balsys. 2019</h3>
+        </footer>
+    </div>
+
+
+
+    <div data-role="page" id="submitFoodIdeaForm">
+        <header data-role="header">
+            <h1>Cook Good Food</h1>
+            <a href="#" data-icon="arrow-l" data-role="button" data-rel="back" onclick="clearPostForm()">Back</a>
+            <a href="#" data-role="button" data-inline="true" id="clear" onclick="clearPostForm()">Clear</a>
+        </header>
+
+        <body>
+            <form data-role="content" id="postForm">
+                <label for="text-basic">Enter Ingredient 1</label>
+                <input type="text" name="ingredient1" id="postIngredient1" value="">
+
+                <label for="text-basic">Enter Ingredient 2</label>
+                <input type="text" name="ingredient2" id="postIngredient2" value="">
+
+                <label for="text-basic">Enter Ingredient 3</label>
+                <input type="text" name="ingredient3" id="postIngredient3" value="">
+
+                <label for="text-basic">YouTube Link</label>
+                <input type="text" name="youtubeLink" id="youtubeLink" value="">
+
+                <a href="#submit" data-role="button" onclick="storeFoodData()" id="submitFood">Submit Food Idea</a>
+            </form>
+        </body>
+        <footer data-role="header">
+            <h3>&copy; CQUniversity, R. Balsys. 2019</h3>
+        </footer>
+    </div>
+
+
+
+    <div data-role="page" id="showLogs">
+        <header data-role="header">
+            <h1>Cook Good Food</h1>
+            <a href="#" data-icon="arrow-l" data-role="button" data-rel="back">Back</a>
+            <a href="#similar" data-role="button" id="similar" onclick="similar()">Similar</a>
+        </header>
+
+        <body>
+            <article data-role="content">
+                <h3 class="ui-bar ui-bar-a ui-corner-all">Current Log Entries</h3>
+                      <div class="ui-body ui-body-a ui-corner-all">
+                              <p>Ingredient1, ingredient2, ingredient3, YouTube Link</p>
+                          </div>
+                <div class="ui-body ui-body-a ui-corner-all">
+                    <div *ngFor='let data in dataArray'>
+                        <br><strong id="getFoodLogs"> </strong><br>
+                        <!-- <p><a href="data.youTubeId" rel="external">Google</a></p>  -->
+                    </div>
+                </div>
+            </article>
+        </body>
+        <footer data-role="header">
+            <nav data-role="navbar">
+                <li><a href="#home" data-icon="home">Home</a></li>
+            </nav>
+        </footer>
+
+
+    </div>
+
+
+
+
+    <div data-role="page" id="similar">
+        <header data-role="header">
+            <h1>Similar Good Food</h1>
+            <a href="#" data-icon="arrow-l" data-role="button" data-rel="back">Back</a>
+            <a href="#home" data-icon="home">Home</a>
+        </header>
+
+        <body>
+            <article data-role="content">
+                <h3 class="ui-bar ui-bar-a ui-corner-all">Current Log Entries</h3>
+                      <div class="ui-body ui-body-a ui-corner-all">
+                              <p>Ingredient1, ingredient2, ingredient3, YouTube Link</p>
+                          </div>
+                <div class="ui-body ui-body-a ui-corner-all">
+                    <div *ngFor='let data in dataArray'>
+                        <br><strong id="getFoodLogs"> </strong><br>
+                        <!-- <p><a href="data.youTubeId" rel="external">Google</a></p>  -->
+                    </div>
+                </div>
+            </article>
+        </body>
+        <footer data-role="header">
+            <nav data-role="navbar">
+                <li><a href="#home" data-icon="home">Home</a></li>
+            </nav>
+        </footer>
+
+
+    </div>
+
+</body>
+
+</html>
