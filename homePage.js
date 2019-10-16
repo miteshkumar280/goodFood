@@ -8,34 +8,35 @@ var youtubeLink;
 var showHomePage = false;
 dataArray = [];
 var data;
+showLogsPage = false;
 
 function postData(postData) {
-    if(postData == false){
-    data = {
-        "ingredient1": document.getElementById("ingredient1").value.toString(),
-        "ingredient2": document.getElementById("ingredient2").value.toString(),
-        "ingredient3": document.getElementById("ingredient3").value.toString(),
+    if (postData == false) {
+        data = {
+            "ingredient1": document.getElementById("ingredient1").value.toString(),
+            "ingredient2": document.getElementById("ingredient2").value.toString(),
+            "ingredient3": document.getElementById("ingredient3").value.toString(),
+        }
     }
-}
-else{
-    data = {
-        "ingredient1": document.getElementById("postIngredient1").value.toString(),
-        "ingredient2": document.getElementById("postIngredient2").value.toString(),
-        "ingredient3": document.getElementById("postIngredient3").value.toString(),
-        "youtubeId" :  document.getElementById("youtubeLink").value.toString(),
+    else {
+        data = {
+            "ingredient1": document.getElementById("postIngredient1").value.toString(),
+            "ingredient2": document.getElementById("postIngredient2").value.toString(),
+            "ingredient3": document.getElementById("postIngredient3").value.toString(),
+            "youtubeId": document.getElementById("youtubeLink").value.toString(),
+        }
+        dataArray.push(data);
     }
-    dataArray.push(data);
-}
 }
 
 function getFoodValue(postData) {
-    if(postData == true){
+    if (postData == true) {
         ingredient1 = document.getElementById("postIngredient1").value;
         ingredient2 = document.getElementById("postIngredient2").value;
         ingredient3 = document.getElementById("postIngredient3").value;
         youtubeId = document.getElementById("youtubeLink").value.toString();
     }
-    else{
+    else {
         ingredient1 = document.getElementById("ingredient1").value;
         ingredient2 = document.getElementById("ingredient2").value;
         ingredient3 = document.getElementById("ingredient3").value;
@@ -48,12 +49,12 @@ function validation(postData) {
         alert("Please Enter all the Fields");
         return false;
     }
-    else if(postData == true){
-        if(youtubeId == ""){
+    else if (postData == true) {
+        if (youtubeId == "") {
             alert("Please Enter all the Fields");
             return false;
         }
-        else{
+        else {
             return true;
         }
     }
@@ -65,6 +66,7 @@ function validation(postData) {
 function getFood() {
     getValidation = validation(false);
     if (getValidation) {
+        showLogsPage = true;
         postData(false);
         getFoodLogs(data);
     }
@@ -86,17 +88,15 @@ function getFoodLogs(data) {
         .then(res => {
             var dataArray = (res);
             console.log(dataArray);
-            if(dataArray.data.length == 0){
+            if (dataArray.data.length == 0) {
                 alert("No Match Found")
             }
-            else{
-            for (let i = 0; i < dataArray.data.length; i++) {
-                document.getElementById("getFoodLogs").append(dataArray.data[i].ingredient1 + "," + dataArray.data[i].ingredient2 + "," + dataArray.data[i].ingredient3 +
-                    "," + dataArray.data[i].youtubeId) + "\n"
-
-                document.getElementById("youtubeLink").append("<a href=" + dataArray.data[i].youtubeId + " rel=" + external + ">" + "Google" + "</a>")
+            else {
+                for (let i = 0; i < dataArray.data.length; i++) {
+                    $("li").append("<a style='text-decoration:none' href = " + dataArray.data[i].youtubeId + "rel = external class = 'button'>" + dataArray.data[i].dishName + "</a>");
+                    $("li").append("<br></br>");
+                }
             }
-        }
             alert(JSON.stringify(res));
         });
 }
@@ -108,17 +108,15 @@ function similar() {
         .then(res => {
             var dataArray = (res);
             console.log(dataArray);
-            if(dataArray.data.length == 0){
+            if (dataArray.data.length == 0) {
                 alert("No Match Found")
             }
-            else{
-            for (let i = 0; i < dataArray.data.length; i++) {
-                document.getElementById("getFoodLogs").append(dataArray.data[i].ingredient1 + "," + dataArray.data[i].ingredient2 + "," + dataArray.data[i].ingredient3 +
-                    "," + dataArray.data[i].youtubeId) + "\n"
-
-                document.getElementById("youtubeLink").append("<a href=" + dataArray.data[i].youtubeId + " rel=" + external + ">" + "Google" + "</a>")
+            else {
+                for (let i = 0; i < dataArray.data.length; i++) {
+                    $("li").append("<a style='text-decoration:none' href = " + dataArray.data[i].youtubeId + "rel = external class = 'button'>" + dataArray.data[i].dishName + "</a>");
+                    $("li").append("<br></br>");
+                }
             }
-        }
             alert(JSON.stringify(res));
         });
 }
@@ -126,12 +124,12 @@ function similar() {
 
 function storeFoodData() {
     getValidation = validation(true);
-    if(getValidation){
-    postData(true);
-    axios.post(postDataURL, dataArray)
-        .then(res => {
-            alert("success in saving Data")
-            showHomePage = true;
-        });
+    if (getValidation) {
+        postData(true);
+        axios.post(postDataURL, dataArray)
+            .then(res => {
+                alert("success in saving Data")
+                showHomePage = true;
+            });
     }
 }
