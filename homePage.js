@@ -15,8 +15,7 @@ function postData(postData) {
         data = {
             "ingredient1": document.getElementById("ingredient1").value.toString(),
             "ingredient2": document.getElementById("ingredient2").value.toString(),
-            "ingredient3": document.getElementById("ingredient3").value.toString(),
-            "dishName" : document.getElementById("ingredient3").value.toString()
+            "ingredient3": document.getElementById("ingredient3").value.toString()
         }
     }
     else {
@@ -24,7 +23,7 @@ function postData(postData) {
             "ingredient1": document.getElementById("postIngredient1").value.toString(),
             "ingredient2": document.getElementById("postIngredient2").value.toString(),
             "ingredient3": document.getElementById("postIngredient3").value.toString(),
-            "dishName" : document.getElementById("ingredient3").value.toString(),
+            "dishName" : document.getElementById("dishName").value.toString(),
             "youtubeId": document.getElementById("youtubeLink").value.toString(),
         }
         dataArray.push(data);
@@ -36,14 +35,13 @@ function getFoodValue(postData) {
         ingredient1 = document.getElementById("postIngredient1").value;
         ingredient2 = document.getElementById("postIngredient2").value;
         ingredient3 = document.getElementById("postIngredient3").value;
-        dishName = document.getElementById("ingredient3").value.toString()
+        dishName = document.getElementById("dishName").value.toString()
         youtubeId = document.getElementById("youtubeLink").value.toString();
     }
     else {
         ingredient1 = document.getElementById("ingredient1").value;
         ingredient2 = document.getElementById("ingredient2").value;
         ingredient3 = document.getElementById("ingredient3").value;
-        dishName = document.getElementById("ingredient3").value.toString()
     }
 }
 
