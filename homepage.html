@@ -104,6 +104,8 @@
                 <!-- <label for="text-basic">Enter Ingredient 3</label> -->
                 <input type="text" name="ingredient3" id="postIngredient3" value="">
 
+                <input type="text" name="dishName" id="dishName" value="">
+
                 <a href="#" data-role="button">Enter YouTube Link(If Any)</a>
                 <input type="text" name="youtubeLink" id="youtubeLink" value="">
 
@@ -139,12 +141,12 @@
     <div data-role="page" id="similar">
         <header data-role="header">
             <h1>Cook Good Food</h1>
-            <a href="#home" data-role="button" data-rel="back">Home</a>
+            <a href="#home" data-role="button">Home</a>
         </header>
         <div data-role="collapsible">
                 <h4>Similar Food List</h4>
             <ul data-role="listview">
-                <li></li>
+                <li id= "showSimilarList" ></li>
             </ul>
         </div>
         <footer data-role="header">

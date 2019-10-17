@@ -16,6 +16,7 @@ function postData(postData) {
             "ingredient1": document.getElementById("ingredient1").value.toString(),
             "ingredient2": document.getElementById("ingredient2").value.toString(),
             "ingredient3": document.getElementById("ingredient3").value.toString(),
+            "dishName" : document.getElementById("ingredient3").value.toString()
         }
     }
     else {
@@ -23,6 +24,7 @@ function postData(postData) {
             "ingredient1": document.getElementById("postIngredient1").value.toString(),
             "ingredient2": document.getElementById("postIngredient2").value.toString(),
             "ingredient3": document.getElementById("postIngredient3").value.toString(),
+            "dishName" : document.getElementById("ingredient3").value.toString(),
             "youtubeId": document.getElementById("youtubeLink").value.toString(),
         }
         dataArray.push(data);
@@ -34,18 +36,20 @@ function getFoodValue(postData) {
         ingredient1 = document.getElementById("postIngredient1").value;
         ingredient2 = document.getElementById("postIngredient2").value;
         ingredient3 = document.getElementById("postIngredient3").value;
+        dishName = document.getElementById("ingredient3").value.toString()
         youtubeId = document.getElementById("youtubeLink").value.toString();
     }
     else {
         ingredient1 = document.getElementById("ingredient1").value;
         ingredient2 = document.getElementById("ingredient2").value;
         ingredient3 = document.getElementById("ingredient3").value;
+        dishName = document.getElementById("ingredient3").value.toString()
     }
 }
 
 function validation(postData) {
     getFoodValue(postData);
-    if (ingredient1 == "" || ingredient2 == "" || ingredient3 == "") {
+    if (ingredient1 == "" || ingredient2 == "" || ingredient3 == "" || dishName == "") {
         alert("Please Enter all the Fields");
         return false;
     }
@@ -93,7 +97,8 @@ function getFoodLogs(data) {
             }
             else {
                 for (let i = 0; i < dataArray.data.length; i++) {
-                    $("li").append("<a style='text-decoration:none' href = " + dataArray.data[i].youtubeId + "rel = external class = 'button'>" + dataArray.data[i].dishName + "</a>");
+                    $("li").empty();
+                    $("li").append("<a style='text-decoration:none' rel = 'external' class = 'button' href = " + dataArray.data[i].youtubeId + ">" + dataArray.data[i].ingredient1 + "</a>");
                     $("li").append("<br></br>");
                 }
             }
@@ -113,7 +118,7 @@ function similar() {
             }
             else {
                 for (let i = 0; i < dataArray.data.length; i++) {
-                    $("li").append("<a style='text-decoration:none' href = " + dataArray.data[i].youtubeId + "rel = external class = 'button'>" + dataArray.data[i].dishName + "</a>");
+                    $("li").append("<a style='text-decoration:none' rel = 'external' class = 'button' href = " + dataArray.data[i].youtubeId + ">" + dataArray.data[i].ingredient1 + "</a>");
                     $("li").append("<br></br>");
                 }
             }
